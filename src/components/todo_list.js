@@ -86,6 +86,28 @@ function TodoApp() {
         console.error('Error calling:', e);
       });
     }, [newTask]);
+
+  // タスク削除API呼び出し
+  const callDeleteTaskApi = useCallback( (id) => {
+    fetch(`${WEB_API_URL}/deletetask`, {
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify([{ id: id }]),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response)
+      }
+      return 
+    })
+    .catch(e => {
+      console.error('Error calling:', e);
+    });
+  }, [WEB_API_URL]);
+
   // テキスト入力フィールドの値が変更用関数
   const handleInputChange = (event) => {
     setNewTask(event.target.value); // 入力された新しい値をnewTaskに設定
@@ -116,7 +138,7 @@ function TodoApp() {
   // 「削除」ボタン用関数
   const handleDeleteTask = (id) => {
     // tasks配列からクリックされたタスク削除し、stateを更新
-    setTasks(tasks.filter((task) => task.id !== id));
+    callDeleteTaskApi(id);
   };
 
   return (
