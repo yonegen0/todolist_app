@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import Calendar from './components/todo_list';
+import TodoApp from './TodoApp';
 import { BrowserRouter } from 'react-router-dom';
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Calendar />} />
+          <Route path="/" element={<TodoApp />} />
         </Routes>
       </BrowserRouter>
     </div>
